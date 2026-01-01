@@ -1,0 +1,1 @@
+export const apiUrl = "https://resumebuilder-backend-ashen.vercel.app/"
