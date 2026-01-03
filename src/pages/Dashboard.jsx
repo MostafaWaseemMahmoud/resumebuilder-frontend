@@ -44,7 +44,7 @@ const Dashboard = ()=> {
       setIsLoading(false)
     })
  };
- const createResume = async (event) => {
+ const createResume = async () => {
   const data = {
     title: title
   };
@@ -65,7 +65,8 @@ const Dashboard = ()=> {
     );
 
     setShowCreateResume(false);
-    navigate(`/app/builder/${res.data.resume._id}`);
+    console.log(res)
+    navigate(`/app/builder/${res.data.resume._id}`)
 
   } catch (err) {
     console.error(err);
@@ -198,17 +199,17 @@ const deleteResume = async (resumeId)=> {
   
 
     {showCreateResume  && (
-      <form onSubmit={createResume} onClick={()=>{setShowCreateResume(false)}} className='fixed inset-0 bg-black/70 backdrop-blur bg-opacity-50 z-10 flex items-center justify-center'>  
+      <div onClick={()=>{setShowCreateResume(false)}} className='fixed inset-0 bg-black/70 backdrop-blur bg-opacity-50 z-10 flex items-center justify-center'>  
           <div onClick={e=>e.stopPropagation()} className='relative bg-slate-50 border shadow-md rounded-lg w-full max-w-sm p-6'>
             <h2 className='text-xl font-bold mb-4'>Create a Resume</h2>
             <input onChange={(e)=>{setTitle(e.target.value)}} value={title} type="text" placeholder='Enter resume title' className='w-full px-4 py-2 mb-4 focus:border-green-600 ring-green-600' required/>
             {!isLoading ? 
-            <button className='w-full py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors'>Create Resume</button>
+            <button onClick={createResume} className='w-full py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors'>Create Resume</button>
           : <Loader />  
           }
             <XIcon className='absolute top-4 right-4 text-slate-400 hover:text-slate-600 cursor-pointer transition-colors' onClick={()=>{setShowCreateResume(false); setTitle('')}}></XIcon>
           </div>
-      </form>
+      </div>
 )
 }
 
